@@ -1,6 +1,23 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 
+function photosList(photos){
+
+  return (
+    <ul style={{listStyle: 'none'}}>
+    {
+      photos.map((photo)=>{
+        return  <li key={photo.id}><img 
+          alt={`From ${photo.author}`}
+          src={`https://picsum.photos/200/300?image=${photo.id}`} /></li>
+      })
+    }
+    </ul>  
+  )
+
+}
+
+
 class App extends Component{
   constructor(props){
     super(props);
@@ -32,18 +49,13 @@ class App extends Component{
   }
 
   render(){
+
     return (
-      <div className="App" style={{listStyle: 'none'}}>
-          <h1>Hello {this.state.placeInUniverse}</h1>
+      <div className="App">
+          <h1>Hello {this.props.placeInUniverse}</h1>
           <h2>Some photos from around the world</h2>
           <div>State hardcoded from <a href='https://picsum.photos/'>api</a></div>
-          <li>
-          {
-            this.state.photosFromTheWorld.map((photo)=>{
-              return  <ul><img src={`https://picsum.photos/200/300?image=${photo.id}`} /></ul>
-            })
-          }
-          </li>
+          {photosList(this.state.photosFromTheWorld)}
       </div>
     );  
   }
