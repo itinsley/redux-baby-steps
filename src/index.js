@@ -2,6 +2,11 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 
+const defaultState={
+  placeInUniverse: 'World',
+  photosFromTheWorld:[]
+}
+
 async function getPhotos(){
   const response = await axios.get('https://picsum.photos/list');
   return response.data.slice(0,10);
@@ -21,15 +26,10 @@ function PhotosList(props){
   )
 }
 
-
-class App extends Component{
+class AppContainer extends Component{
   constructor(props){
     super(props);
-    this.state={
-      placeInUniverse: 'World',
-      photosFromTheWorld:[
-      ]
-    }
+    this.state=defaultState
   }
 
   async componentDidMount(){
@@ -38,17 +38,28 @@ class App extends Component{
   }
 
   render(){
+    return <App 
+              placeInUniverse = {this.state.placeInUniverse} 
+              photosFromTheWorld = {this.state.photosFromTheWorld} />
+  }
+}
 
+class App extends Component{
+  constructor(props){
+    super(props);
+  }
+
+  render(){
     return (
       <div className="App" style={{listStyle: 'none'}}>
-          <h1>Hello {this.state.placeInUniverse}</h1>
+          <h1>Hello {this.props.placeInUniverse}</h1>
           <h2>Some photos from around the world</h2>
           <div>Retrieved from <a href='https://picsum.photos/'>api</a></div>
-          <PhotosList photos={this.state.photosFromTheWorld} />
+          <PhotosList photos={this.props.photosFromTheWorld} />
       </div>
     );  
   }
 }
 
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<AppContainer />, document.getElementById('root'));
