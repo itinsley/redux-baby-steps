@@ -9,10 +9,12 @@ async function getPhotos(){
 
 function PhotosList(props){
   return (
-    <li>
+    <li >
     {
       props.photos.map((photo)=>{
-        return  <ul><img src={`https://picsum.photos/200/300?image=${photo.id}`} /></ul>
+        return  <ul key={photo.id}><img 
+          alt={`From ${photo.author}`}
+          src={`https://picsum.photos/200/300?image=${photo.id}`} /></ul>
       })
     }
     </li>  
