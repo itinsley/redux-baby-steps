@@ -1,10 +1,23 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import {createStore} from 'redux';
 
 const defaultState={
   placeInUniverse: 'World',
-  photosFromTheWorld:[]
+  photosFromTheWorld:[
+  ]
+}
+
+const store = createStore(photosReducer);
+
+function photosReducer(state = defaultState, action) {
+  switch (action.type) {
+    case 'GET_PHOTOS':
+      return { ...state, photosFromTheWorld: action.photosFromTheWorld }
+    default:
+    return state
+  }
 }
 
 async function getPhotos(){
@@ -27,28 +40,27 @@ function PhotosList(props){
 }
 
 class AppContainer extends Component{
-  constructor(props){
-    super(props);
-    this.state=defaultState
-  }
-
   async componentDidMount(){
     const photosFromTheWorld = await getPhotos();
-    this.setState({photosFromTheWorld})
+    store.dispatch({
+      type: 'GET_PHOTOS',
+      photosFromTheWorld
+    })
+
+    // You would never use this, it's merely to allow us to show the smallest incremental
+    // change to using Redux for storing state
+    this.forceUpdate();
   }
 
   render(){
+    const reduxState = store.getState();
     return <App 
-              placeInUniverse = {this.state.placeInUniverse} 
-              photosFromTheWorld = {this.state.photosFromTheWorld} />
+              placeInUniverse = {reduxState.placeInUniverse} 
+              photosFromTheWorld = {reduxState.photosFromTheWorld} />
   }
 }
 
 class App extends Component{
-  constructor(props){
-    super(props);
-  }
-
   render(){
     return (
       <div className="App">
