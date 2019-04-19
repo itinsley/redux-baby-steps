@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 
-function photosList(photos){
-
+function PhotosList(props){
   return (
     <ul style={{listStyle: 'none'}}>
     {
-      photos.map((photo)=>{
+      props.photos.map((photo)=>{
         return  <li key={photo.id}><img 
           alt={`From ${photo.author}`}
           src={`https://picsum.photos/200/300?image=${photo.id}`} /></li>
@@ -14,7 +13,6 @@ function photosList(photos){
     }
     </ul>  
   )
-
 }
 
 
@@ -55,7 +53,7 @@ class App extends Component{
           <h1>Hello {this.props.placeInUniverse}</h1>
           <h2>Some photos from around the world</h2>
           <div>State hardcoded from <a href='https://picsum.photos/'>api</a></div>
-          {photosList(this.state.photosFromTheWorld)}
+          <PhotosList photos={this.state.photosFromTheWorld} />
       </div>
     );  
   }
