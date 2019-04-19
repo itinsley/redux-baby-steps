@@ -47,14 +47,22 @@ function PhotosList(props){
 }
 
 class AppContainer extends Component{
+  constructor(props){
+    super(props)
+    this.afterUpdate=this.afterUpdate.bind(this);
+    store.subscribe(this.afterUpdate);
+  }
   async componentDidMount(){
     const photosFromTheWorld = await getPhotos();
     store.dispatch(getPhotoAction(photosFromTheWorld))
+  }
 
+  afterUpdate(){
     // You would never use this, it's merely to allow us to show the smallest incremental
     // change to using Redux for storing state
     this.forceUpdate();
   }
+  
 
   render(){
     const reduxState = store.getState();
