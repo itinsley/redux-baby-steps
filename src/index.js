@@ -1,5 +1,11 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
+
+async function getPhotos(){
+  const response = await axios.get('https://picsum.photos/list');
+  return response.data.slice(0,10);
+}
 
 function PhotosList(props){
   return (
@@ -22,28 +28,13 @@ class App extends Component{
     this.state={
       placeInUniverse: 'World',
       photosFromTheWorld:[
-        {
-          "format": "jpeg",
-          "width": 5616,
-          "height": 3744,
-          "filename": "0000_yC-Yzbqy7PY.jpeg",
-          "id": 0,
-          "author": "Alejandro Escamilla",
-          "author_url": "https://unsplash.com/@alejandroescamilla",
-          "post_url": "https://unsplash.com/photos/yC-Yzbqy7PY"
-        },
-        {
-          "format": "jpeg",
-          "width": 5616,
-          "height": 3744,
-          "filename": "0001_LNRyGwIJr5c.jpeg",
-          "id": 1,
-          "author": "Alejandro Escamilla",
-          "author_url": "https://unsplash.com/@alejandroescamilla",
-          "post_url": "https://unsplash.com/photos/LNRyGwIJr5c"
-        },
       ]
     }
+  }
+
+  async componentDidMount(){
+    const photosFromTheWorld = await getPhotos();
+    this.setState({photosFromTheWorld})
   }
 
   render(){
@@ -52,7 +43,7 @@ class App extends Component{
       <div className="App">
           <h1>Hello {this.props.placeInUniverse}</h1>
           <h2>Some photos from around the world</h2>
-          <div>State hardcoded from <a href='https://picsum.photos/'>api</a></div>
+          <div>Retrieved from <a href='https://picsum.photos/'>api</a></div>
           <PhotosList photos={this.state.photosFromTheWorld} />
       </div>
     );  
