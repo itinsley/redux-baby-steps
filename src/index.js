@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import {createStore} from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 
 const defaultState={
   placeInUniverse: 'World',
@@ -9,7 +10,9 @@ const defaultState={
   ]
 }
 
-const store = createStore(photosReducer);
+const store = createStore(
+  photosReducer,
+  applyMiddleware(thunk));
 
 function photosReducer(state = defaultState, action) {
   switch (action.type) {
@@ -30,6 +33,14 @@ function getPhotoAction(photosFromTheWorld){
     type: 'GET_PHOTOS',
     photosFromTheWorld
   }
+}
+
+function fetchPhotos() {
+  return function (dispatch) {
+    return getPhotos().then((photos)=>{
+      dispatch(getPhotoAction(photos))
+    });
+  };
 }
 
 function PhotosList(props){
@@ -53,8 +64,7 @@ class AppContainer extends Component{
     store.subscribe(this.afterUpdate);
   }
   async componentDidMount(){
-    const photosFromTheWorld = await getPhotos();
-    store.dispatch(getPhotoAction(photosFromTheWorld))
+    store.dispatch(fetchPhotos())
   }
 
   afterUpdate(){
@@ -63,7 +73,6 @@ class AppContainer extends Component{
     this.forceUpdate();
   }
   
-
   render(){
     const reduxState = store.getState();
     return <App 
