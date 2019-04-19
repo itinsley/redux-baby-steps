@@ -1,68 +1,30 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Redux in Baby Steps
 
-## Available Scripts
+The cognitive overhead of implementing Redux is significant. This is partly because it provides a solution to managing state in complex apps so appears crazily over-engineered when applied to a simple todo list example but also due to the following:
 
-In the project directory, you can run:
+## A lot of components and concepts
+Before you even consider Redux, you will need to be familiar with React concepts such as how state and properties are managed and the difference between pure and impure components. 
 
-### `npm start`
+When you introduce React, there are a lot of components and concepts to introduce and a lot of them have names that are unintuitive to someone unfamiliar with the flux pattern. Most introductions to Redux require you to include all the following components to get an end-to-end app working. In addition, because Redux is designed for serious apps, all the different components are stored in separate files. 
+  * Store
+  * Reducer
+  * Actions
+  * State mapping to props
+  * Dispatching
+  * Subscriptions
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## Abstraction/Indirection
+With a framework like Redux your code is not making direct calls to your own functions, in fact you don't interact directly with the store at all - even for configurations! Instead you use further abstractions like Connectors, Providers and Mappings. This is great for an experienced user but for someone new to Redux this feels like a leap of faith and it's easy to get the feeling that this is all just magic - your code works but you don't really know how and as all framework users know, that tends to  mean you're in trouble when things go wrong.
 
-### `npm test`
+## Staying out of the weeds
+I have learnt that keeping my commits small (while keeping the code working) is essential for me to be productive - if I change too many things, then once it breaks I am "in the weeds" and have to undo everything and start again.
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+This repo is an attempt to go from a 5 line Hello World app to a Redux implementation in the smallest steps I can take - finding a way to introduce each component and each concept 1 baby step at a time, using only one file so that I understand all the code I am introducing to my app.
 
-### `npm run build`
+# Running the app
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Dependent on [create-react-app](https://github.com/facebook/create-react-app) so install if necessary, then:
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+    $ npm install
+    $ npm start
