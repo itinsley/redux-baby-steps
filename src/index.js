@@ -25,6 +25,13 @@ async function getPhotos(){
   return response.data.slice(0,10);
 }
 
+function getPhotoAction(photosFromTheWorld){
+  return {
+    type: 'GET_PHOTOS',
+    photosFromTheWorld
+  }
+}
+
 function PhotosList(props){
   return (
     <li >
@@ -42,10 +49,7 @@ function PhotosList(props){
 class AppContainer extends Component{
   async componentDidMount(){
     const photosFromTheWorld = await getPhotos();
-    store.dispatch({
-      type: 'GET_PHOTOS',
-      photosFromTheWorld
-    })
+    store.dispatch(getPhotoAction(photosFromTheWorld))
 
     // You would never use this, it's merely to allow us to show the smallest incremental
     // change to using Redux for storing state
