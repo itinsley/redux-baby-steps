@@ -22,6 +22,16 @@ I have learnt that keeping my commits small (while keeping the code working) is 
 
 This repo is an attempt to go from a 5 line Hello World app to a Redux implementation in the smallest steps I can take - finding a way to introduce each component and each concept 1 baby step at a time, using only one file so that I understand all the code I am introducing to my app.
 
+Note, I don't even introduce Redux until step 9 so that I can demonstrate the key points about state management and pure components that are a necessary pre-requisite for a Redux implememntation.
+
+## Key Milestones
+1. [The simplest react app](https://github.com/itinsley/redux-baby-steps/blob/hello-world/src/index.js)
+2. [Asynchronous API call](https://github.com/itinsley/redux-baby-steps/blob/call-api/src/index.js)
+3. [Prepare for Redux, container wrapping pure component](https://github.com/itinsley/redux-baby-steps/blob/wrap-pure-component/src/index.js)
+4. [Move state into Redux using redux-store](https://github.com/itinsley/redux-baby-steps/blob/use-redux-state/src/index.js)
+5. [Use thunk for handling async calls](https://github.com/itinsley/redux-baby-steps/blob/use-thunk/src/index.js)
+
+
 # Running the app
 
 Dependent on [create-react-app](https://github.com/facebook/create-react-app) so install if necessary, then:
