@@ -62,22 +62,20 @@ class AppContainer extends Component{
     super(props)
     this.afterUpdate=this.afterUpdate.bind(this);
     store.subscribe(this.afterUpdate);
+    this.state = store.getState();
   }
   async componentDidMount(){
     store.dispatch(fetchPhotos())
   }
 
   afterUpdate(){
-    // You would never use this, it's merely to allow us to show the smallest incremental
-    // change to using Redux for storing state
-    this.forceUpdate();
+    this.setState(store.getState());
   }
   
   render(){
-    const reduxState = store.getState();
     return <App 
-              placeInUniverse = {reduxState.placeInUniverse} 
-              photosFromTheWorld = {reduxState.photosFromTheWorld} />
+              placeInUniverse = {this.state.placeInUniverse} 
+              photosFromTheWorld = {this.state.photosFromTheWorld} />
   }
 }
 
