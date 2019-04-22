@@ -10,6 +10,13 @@ const defaultState={
   ]
 }
 
+function mapStateToProps(state, props){
+  return {
+    placeInUniverse: state.placeInUniverse,
+    photosFromTheWorld: state.photosFromTheWorld
+  }
+}
+
 const store = createStore(
   photosReducer,
   applyMiddleware(thunk));
@@ -73,9 +80,8 @@ class AppContainer extends Component{
   }
   
   render(){
-    return <App 
-              placeInUniverse = {this.state.placeInUniverse} 
-              photosFromTheWorld = {this.state.photosFromTheWorld} />
+    const props = mapStateToProps(this.state, props);
+    return <App {...props} />
   }
 }
 
