@@ -30,6 +30,7 @@ Note, I don't even introduce Redux until step 9 so that I can demonstrate the ke
 3. [Prepare for Redux, container wrapping pure component](https://github.com/itinsley/redux-baby-steps/blob/wrap-pure-component/src/index.js)
 4. [Move state into Redux using redux-store](https://github.com/itinsley/redux-baby-steps/blob/use-redux-state/src/index.js)
 5. [Use thunk for handling async calls](https://github.com/itinsley/redux-baby-steps/blob/use-thunk/src/index.js)
+6. [Use react-redux Connect and Provider for all the plumbing between store and component](https://github.com/itinsley/redux-baby-steps/commits/use-react-redux-connect)
 
 
 # Running the app

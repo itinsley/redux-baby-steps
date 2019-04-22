@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
+import { Provider, connect } from 'react-redux';
 
 const defaultState={
   placeInUniverse: 'World',
@@ -65,23 +66,13 @@ function PhotosList(props){
 }
 
 class AppContainer extends Component{
-  constructor(props){
-    super(props)
-    this.afterUpdate=this.afterUpdate.bind(this);
-    store.subscribe(this.afterUpdate);
-    this.state = store.getState();
-  }
-  async componentDidMount(){
-    store.dispatch(fetchPhotos())
-  }
-
-  afterUpdate(){
-    this.setState(store.getState());
-  }
-  
   render(){
-    const props = mapStateToProps(this.state, props);
-    return <App {...props} />
+    const AppContainer = connect(mapStateToProps, {})(App)
+    return(
+      <Provider store={store}>
+        <AppContainer />
+      </Provider>
+    )
   }
 }
 
@@ -98,5 +89,5 @@ class App extends Component{
   }
 }
 
-
 ReactDOM.render(<AppContainer />, document.getElementById('root'));
+store.dispatch(fetchPhotos())
